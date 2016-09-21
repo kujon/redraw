@@ -45,8 +45,8 @@ class LineSeries extends PureComponent {
     }
     render() {
         return <g>
-            {this.renderPoints(this.points)}
             {this.renderCurve(this.points)}
+            {this.renderPoints(this.points)}
         </g>;
     }
 }
