@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "lint": "node node_modules/eslint/bin/eslint.js . --ext .js,.jsx --ignore-path .gitignore"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,20 @@
   "bugs": {
     "url": "https://github.com/kujon/redraw/issues"
   },
-  "homepage": "https://github.com/kujon/redraw#readme"
+  "peerDependencies": {
+    "react": ">= 15.3.0"
+  },
+  "homepage": "https://github.com/kujon/redraw#readme",
+  "devDependencies": {
+    "@kadira/storybook": "^2.5.2",
+    "babel-core": "^6.14.0",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.5",
+    "babel-preset-latest": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "eslint": "^3.5.0",
+    "eslint-config-kujon": "^1.0.0",
+    "eslint-plugin-react": "^6.3.0",
+    "webpack": "^1.13.2"
+  }
 }
