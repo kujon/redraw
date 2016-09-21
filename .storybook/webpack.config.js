@@ -6,7 +6,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel',
                 query: {
-                    presets: ['react', 'latest']
+                    presets: ['react', 'latest', 'stage-1']
                 }
             }
         ]
