@@ -1,7 +1,7 @@
 import React from 'react';
 import {action, storiesOf} from '@kadira/storybook';
 
-import Symbols from '../../src/shapes/Symbols.js';
+import Symbols from '../../src/shapes/Symbols';
 
 storiesOf('Symbols', module)
     .addDecorator(story => <svg width={100} height={100}>{story()}</svg>)

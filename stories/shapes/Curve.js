@@ -1,7 +1,7 @@
 import React from 'react';
 import {action, storiesOf} from '@kadira/storybook';
 
-import Curve from '../../src/shapes/Curve.js';
+import Curve from '../../src/shapes/Curve';
 
 storiesOf('Curve', module)
     .addDecorator(story => <svg width={100} height={100}>{story()}</svg>)

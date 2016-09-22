@@ -4,7 +4,7 @@ import {addIndex, map, reduce} from 'ramda';
 
 import {EVENT_ATTRIBUTES, eventAttributes, findSeriesChildren} from './utils/react';
 
-//    mapIndexed :: Fuctor f => (a -> Number -> b) -> f a -> f b
+//    mapIndexed :: Functor f => (a -> Number -> b) -> f a -> f b
 const mapIndexed = addIndex(map);
 
 //    domain :: (a -> Number) -> [a] -> Number

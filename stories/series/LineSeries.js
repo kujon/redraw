@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {action, storiesOf} from '@kadira/storybook';
 
-import LineSeries from '../../src/series/LineSeries.js';
+import LineSeries from '../../src/series/LineSeries';
 
 const EmojiSymbol = ({cx, cy}) =>
     <text dominantBaseline='central' textAnchor='middle' transform={`translate(${cx}, ${cy})`}>😄</text>;

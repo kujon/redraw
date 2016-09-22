@@ -1,7 +1,7 @@
 import React from 'react';
 import {action, storiesOf} from '@kadira/storybook';
 
-import Area from '../../src/shapes/Area.js';
+import Area from '../../src/shapes/Area';
 
 storiesOf('Area', module)
     .addDecorator(story => <svg width={100} height={100}>{story()}</svg>)
