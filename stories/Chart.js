@@ -10,6 +10,14 @@ storiesOf('Chart', module)
     .add('Basic', () =>
         <Chart width={140} height={140}>
             <LineSeries
+                pointProps={{
+                    size: 50,
+                    stroke: '#85946C',
+                    fill: '#D2E1BA'
+                }}
+                curveProps={{
+                    stroke: '#85946C'
+                }}
                 data={data} />
         </Chart>
     );

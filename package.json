@@ -36,6 +36,7 @@
     "webpack": "^1.13.2"
   },
   "dependencies": {
+    "d3-scale": "^1.0.3",
     "d3-shape": "^1.0.3",
     "ramda": "^0.22.1",
     "react-motion": "^0.4.4"
