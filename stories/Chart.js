@@ -17,7 +17,7 @@ storiesOf('Chart', module)
                     stroke: '#895D94',
                     fill: '#D9BAE1'
                 }}
-                areaProps={{
+                curveProps={{
                     stroke: '#895D94',
                     fill: '#D9BAE1'
                 }}
