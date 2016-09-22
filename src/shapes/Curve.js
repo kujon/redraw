@@ -1,5 +1,6 @@
 import React, {PropTypes, PureComponent} from 'react';
 import {line, curveLinear} from 'd3-shape';
+// import {Motion, spring} from 'react-motion';
 
 import {EVENT_ATTRIBUTES, eventAttributes} from '../utils/react';
 import {PRESENTATIONAL_ATTRIBUTES, presentationalAttributes} from '../utils/svg';
@@ -23,14 +24,14 @@ class Curve extends PureComponent {
         fill: 'none',
         stroke: 'black'
     }
-    get path() {
-        const {points, type} = this.props;
-
+    getPath(points, type) {
         return line().x(d => d.x).y(d => d.y).curve(CURVE_TYPE_MAP[type])(points);
     }
     render() {
+        const {points, type} = this.props;
+
         return <path
-            d={this.path}
+            d={this.getPath(points, type)}
             {...presentationalAttributes(this.props)}
             {...eventAttributes(this.props)} />;
     }

@@ -12,14 +12,16 @@ class LineSeries extends PureComponent {
         data: PropTypes.arrayOf(PropTypes.object).isRequired,
         xScale: PropTypes.func.isRequired,
         yScale: PropTypes.func.isRequired,
-        pointElement: PropTypes.element,
         curveProps: PropTypes.object,
+        pointElement: PropTypes.element,
         pointProps: PropTypes.object,
         x: PropTypes.func,
         y: PropTypes.func
     }
     static defaultProps = {
-        pointElement: <Symbols cx={0} cy={0} size={100} />,
+        curveProps: {},
+        pointElement: <Symbols />,
+        pointProps: {},
         x: d => d.x,
         y: d => d.y
     }

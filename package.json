@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "d3-shape": "^1.0.3",
-    "ramda": "^0.22.1"
+    "ramda": "^0.22.1",
+    "react-motion": "^0.4.4"
   }
 }

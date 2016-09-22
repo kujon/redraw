@@ -1,5 +1,6 @@
 import React, {PropTypes, PureComponent} from 'react';
 import {symbol, symbolCircle, symbolCross, symbolDiamond, symbolSquare, symbolTriangle, symbolWye} from 'd3-shape';
+import {Motion, spring} from 'react-motion';
 
 import {EVENT_ATTRIBUTES, eventAttributes} from '../utils/react';
 import {PRESENTATIONAL_ATTRIBUTES, presentationalAttributes} from '../utils/svg';
@@ -17,27 +18,34 @@ class Symbols extends PureComponent {
     static propTypes = {
         ...EVENT_ATTRIBUTES,
         ...PRESENTATIONAL_ATTRIBUTES,
-        size: PropTypes.number.isRequired,
-        cx: PropTypes.number.isRequired,
-        cy: PropTypes.number.isRequired,
+        cx: PropTypes.number,
+        cy: PropTypes.number,
+        size: PropTypes.number,
         type: PropTypes.oneOf(['circle', 'cross', 'diamond', 'square', 'triangle', 'wye'])
     }
     static defaultProps = {
+        cx: 0,
+        cy: 0,
+        size: 100,
         type: 'circle'
     }
-    get path() {
-        const {size, type} = this.props;
-
+    getPath(size, type) {
         return symbol().type(SYMBOL_TYPE_MAP[type]).size(size)();
     }
     render() {
-        const {cx, cy} = this.props;
+        const {cx, cy, size, type} = this.props;
 
-        return <path
-            d={this.path}
-            transform={`translate(${cx}, ${cy})`}
-            {...presentationalAttributes(this.props)}
-            {...eventAttributes(this.props)} />;
+        return <Motion
+            style={{
+                cy: spring(cy, {stiffness: 230, damping: 30})
+            }}>
+            {({cy}) =>
+                <path
+                    d={this.getPath(size, type)}
+                    transform={`translate(${cx}, ${cy})`}
+                    {...presentationalAttributes(this.props)}
+                    {...eventAttributes(this.props)} />}
+        </Motion>;
     }
 }
 
