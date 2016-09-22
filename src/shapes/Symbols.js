@@ -18,14 +18,14 @@ class Symbols extends PureComponent {
     static propTypes = {
         ...EVENT_ATTRIBUTES,
         ...PRESENTATIONAL_ATTRIBUTES,
-        cx: PropTypes.number,
-        cy: PropTypes.number,
+        x: PropTypes.number,
+        y: PropTypes.number,
         size: PropTypes.number,
         type: PropTypes.oneOf(['circle', 'cross', 'diamond', 'square', 'triangle', 'wye'])
     }
     static defaultProps = {
-        cx: 0,
-        cy: 0,
+        x: 0,
+        y: 0,
         size: 100,
         type: 'circle'
     }
@@ -33,16 +33,16 @@ class Symbols extends PureComponent {
         return symbol().type(SYMBOL_TYPE_MAP[type]).size(size)();
     }
     render() {
-        const {cx, cy, size, type} = this.props;
+        const {x, y, size, type} = this.props;
 
         return <Motion
             style={{
-                cy: spring(cy, {stiffness: 230, damping: 30})
+                y: spring(y, {stiffness: 230, damping: 30})
             }}>
-            {({cy}) =>
+            {({y}) =>
                 <path
                     d={this.getPath(size, type)}
-                    transform={`translate(${cx}, ${cy})`}
+                    transform={`translate(${x}, ${y})`}
                     {...presentationalAttributes(this.props)}
                     {...eventAttributes(this.props)} />}
         </Motion>;

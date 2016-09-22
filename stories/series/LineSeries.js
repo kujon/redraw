@@ -3,8 +3,8 @@ import {action, storiesOf} from '@kadira/storybook';
 
 import LineSeries from '../../src/series/LineSeries';
 
-const EmojiSymbol = ({cx, cy}) =>
-    <text dominantBaseline='central' textAnchor='middle' transform={`translate(${cx}, ${cy})`}>😄</text>;
+const EmojiSymbol = ({x, y}) =>
+    <text dominantBaseline='central' textAnchor='middle' transform={`translate(${x}, ${y})`}>😄</text>;
 
 const data = [{x: 20, y: 30}, {x: 45, y: 110}, {x: 70, y: 90}, {x: 95, y: 50}, {x: 120, y: 30}];
 const xScale = x => x;

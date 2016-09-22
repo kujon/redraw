@@ -1,9 +1,13 @@
+import React from 'react';
+
 import defineSeries from './defineSeries';
 import Area from '../shapes/Area';
+import Symbols from '../shapes/Symbols';
 
 const AreaSeries = defineSeries(
     'AreaSeries',
     Area,
+    <Symbols />,
     (x, y, xScale, yScale) => (datum, key) => ({
         ...datum,
         x: xScale(x(datum)),

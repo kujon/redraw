@@ -16,10 +16,11 @@ class Curve extends PureComponent {
         points: PropTypes.arrayOf(PropTypes.shape({
             x: PropTypes.number,
             y: PropTypes.number
-        })).isRequired,
+        })),
         type: PropTypes.oneOf(['linear'])
     }
     static defaultProps = {
+        points: [],
         type: 'linear',
         fill: 'none',
         stroke: 'black'

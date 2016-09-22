@@ -18,10 +18,11 @@ class Area extends PureComponent {
             x1: PropTypes.number,
             y0: PropTypes.number,
             y1: PropTypes.number
-        })).isRequired,
+        })),
         type: PropTypes.oneOf(['linear'])
     }
     static defaultProps = {
+        points: [],
         type: 'linear',
         fill: 'black',
         stroke: 'black'

@@ -7,19 +7,19 @@ storiesOf('Symbols', module)
     .addDecorator(story => <svg width={100} height={100}>{story()}</svg>)
     .add('Circle', () =>
         <Symbols
-            cx={50} cy={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />)
+            x={50} y={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />)
     .add('Cross', () =>
         <Symbols
-            type='cross' cx={50} cy={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />)
+            type='cross' x={50} y={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />)
     .add('Diamond', () =>
         <Symbols
-            type='diamond' cx={50} cy={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />)
+            type='diamond' x={50} y={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />)
     .add('Square', () =>
         <Symbols
-            type='square' cx={50} cy={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />)
+            type='square' x={50} y={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />)
     .add('Triangle', () =>
         <Symbols
-            type='triangle' cx={50} cy={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />)
+            type='triangle' x={50} y={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />)
     .add('Wye', () =>
         <Symbols
-            type='wye' cx={50} cy={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />);
+            type='wye' x={50} y={50} size={100} fill='#D2E1BA' stroke='#85946C' onClick={action('clicked!')} />);

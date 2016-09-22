@@ -1,11 +1,10 @@
 import React, {PropTypes, PureComponent} from 'react';
 import {addIndex, map} from 'ramda';
-import Symbols from '../shapes/Symbols';
 
 //    mapIndexed :: Functor f => (a -> Number -> b) -> f a -> f b
 const mapIndexed = addIndex(map);
 
-const defineSeries = (name, CurveShape, toPoint) => class extends PureComponent {
+const defineSeries = (name, CurveShape, pointElement, toPoint) => class extends PureComponent {
     static displayName = name
     static propTypes = {
         data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -19,7 +18,7 @@ const defineSeries = (name, CurveShape, toPoint) => class extends PureComponent 
     }
     static defaultProps = {
         curveProps: {},
-        pointElement: <Symbols />,
+        pointElement,
         pointProps: {},
         x: d => d.x,
         y: d => d.y,
@@ -34,7 +33,7 @@ const defineSeries = (name, CurveShape, toPoint) => class extends PureComponent 
     renderPointItem = ({x, y, ...point}) => {
         const {pointElement, pointProps} = this.props;
 
-        return React.cloneElement(pointElement, {...point, ...pointProps, cx: x, cy: y});
+        return React.cloneElement(pointElement, {...point, ...pointProps, x, y});
     }
     renderPoints(points) {
         return map(this.renderPointItem, points);
