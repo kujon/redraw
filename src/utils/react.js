@@ -1,5 +1,5 @@
-import {keys, map, pick} from 'ramda';
-import {PropTypes} from 'react';
+import {curry, keys, map, pick, test} from 'ramda';
+import {Children, PropTypes} from 'react';
 
 const EVENT_ATTRIBUTES = {
     onClick: PropTypes.func,
@@ -14,3 +14,31 @@ const EVENT_ATTRIBUTES = {
 
 //           eventAttributes :: Props -> Props
 export const eventAttributes = props => map(handler => evt => handler(props, evt), pick(keys(EVENT_ATTRIBUTES), props));
+
+//           displayName :: Component -> String
+export const displayName = Type => Type.displayName || Type.name || 'Component';
+
+//           isSeriesChild :: ReactElement -> Boolean
+export const isSeriesChild = child => test(/Series$/, child.type.displayName);
+
+//           isAxisChild :: ReactElement -> Boolean
+export const isAxisChild = child => test(/Axis$/, child.type.displayName);
+
+//    findChildren :: (ReactElement -> Boolean) -> Children -> Children
+const findChildren = curry((predicate, children) => {
+    const found = [];
+
+    Children.forEach(children, child => {
+        if (predicate(child)) {
+            found.push(child);
+        }
+    });
+
+    return found;
+});
+
+//           findSeriesChildren :: Children -> Children
+export const findSeriesChildren = findChildren(isSeriesChild);
+
+//           findAxisChildren :: Children -> Children
+export const findAxisChildren = findChildren(isAxisChild);

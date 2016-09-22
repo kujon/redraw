@@ -8,22 +8,25 @@ import Symbols from '../shapes/Symbols';
 const mapIndexed = addIndex(map);
 
 class LineSeries extends PureComponent {
+    static displayName = 'LineSeries'
     static propTypes = {
         data: PropTypes.arrayOf(PropTypes.object).isRequired,
-        xScale: PropTypes.func.isRequired,
-        yScale: PropTypes.func.isRequired,
         curveProps: PropTypes.object,
         pointElement: PropTypes.element,
         pointProps: PropTypes.object,
         x: PropTypes.func,
-        y: PropTypes.func
+        y: PropTypes.func,
+        xScale: PropTypes.func,
+        yScale: PropTypes.func
     }
     static defaultProps = {
         curveProps: {},
         pointElement: <Symbols />,
         pointProps: {},
         x: d => d.x,
-        y: d => d.y
+        y: d => d.y,
+        xScale: x => x,
+        yScale: y => y
     }
     get points() {
         const {data, x, y, xScale, yScale} = this.props;
