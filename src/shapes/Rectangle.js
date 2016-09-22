@@ -25,9 +25,11 @@ class Rectangle extends PureComponent {
         return <Motion
             style={{
                 width: spring(width, {stiffness: 230, damping: 30}),
-                height: spring(height, {stiffness: 230, damping: 30})
+                height: spring(height, {stiffness: 230, damping: 30}),
+                x: spring(x, {stiffness: 230, damping: 30}),
+                y: spring(y, {stiffness: 230, damping: 30})
             }}>
-            {({width, height}) =>
+            {({x, y, width, height}) =>
                 <rect
                     width={width}
                     height={height}
