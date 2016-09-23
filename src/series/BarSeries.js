@@ -20,7 +20,7 @@ const BarSeries = defineSeries(
     <Rectangle width={10} />,
     (x, y, xScale, yScale) => (datum, key) => {
         const yValue = yScale(y(datum));
-        const height = Math.abs(yScale.range()[0] - yValue);
+        const height = Math.abs(yScale(0) - yValue);
 
         return {
             ...datum,
