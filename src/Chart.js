@@ -1,6 +1,6 @@
 import React, {PropTypes, PureComponent} from 'react';
 import {scaleLinear} from 'd3-scale';
-import {addIndex, defaultTo, fromPairs, map, reduce, toPairs} from 'ramda';
+import {addIndex, compose, defaultTo, fromPairs, map, reduce, toPairs} from 'ramda';
 
 import Axis from './axis/Axis';
 import {
@@ -35,6 +35,9 @@ const scales = (type, length, inverted, axes, groupedSeries) => fromPairs(map(([
     ];
 }, groupedSeries));
 
+//    groupSeries :: String -> [ReactElement] -> {String :: [ReactElement]}
+const groupSeries = compose(toPairs, groupByProp);
+
 class Chart extends PureComponent {
     static propTypes = {
         ...EVENT_ATTRIBUTES,
@@ -45,8 +48,8 @@ class Chart extends PureComponent {
         const {children, height, width} = this.props;
         const series = findSeriesChildren(children);
         const axes = findAxisChildren(children);
-        const groupedSeriesX = toPairs(groupByProp('xAxisId', series));
-        const groupedSeriesY = toPairs(groupByProp('yAxisId', series));
+        const groupedSeriesX = groupSeries('xAxisId', series);
+        const groupedSeriesY = groupSeries('yAxisId', series);
 
         const xScales = scales('x', width, false, axes, groupedSeriesX);
         const yScales = scales('y', height, true, axes, groupedSeriesY);
@@ -56,15 +59,23 @@ class Chart extends PureComponent {
     renderSeries() {
         const {children} = this.props;
         const series = findSeriesChildren(children);
-        const scales = this.getScales();
+        const {xScales, yScales} = this.getScales();
 
         return mapIndexed((s, key) => {
             const {xAxisId, yAxisId} = s.props;
-            const xScale = scales.xScales[xAxisId].scale;
-            const yScale = scales.yScales[yAxisId].scale;
+            const xScale = xScales[xAxisId].scale;
+            const yScale = yScales[yAxisId].scale;
 
             return React.cloneElement(s, {xScale, yScale, key});
         }, series);
+    }
+    renderAxes() {
+        const {children, height, width} = this.props;
+        const axes = findAxisChildren(children);
+
+        return mapIndexed((a, key) =>
+            React.cloneElement(a, {length: a.props.orientation === 'x' ? width : height, key}),
+        axes);
     }
     render() {
         const {height, width} = this.props;
@@ -74,6 +85,7 @@ class Chart extends PureComponent {
             width={width}
             height={height}>
             <g>{this.renderSeries()}</g>
+            <g>{this.renderAxes()}</g>
         </svg>;
     }
 }
