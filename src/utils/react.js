@@ -1,7 +1,7 @@
 import {curry, find, groupBy, keys, map, pick, test} from 'ramda';
 import {Children, PropTypes} from 'react';
 
-const EVENT_ATTRIBUTES = {
+export const EVENT_ATTRIBUTES = {
     onClick: PropTypes.func,
     onMouseDown: PropTypes.func,
     onMouseUp: PropTypes.func,

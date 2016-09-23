@@ -1,7 +1,7 @@
 import {keys, pick} from 'ramda';
 import {PropTypes} from 'react';
 
-const PRESENTATIONAL_ATTRIBUTES = {
+export const PRESENTATIONAL_ATTRIBUTES = {
     fill: PropTypes.string,
     stroke: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     opacity: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

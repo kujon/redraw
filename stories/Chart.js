@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {storiesOf} from '@kadira/storybook';
+import {action, storiesOf} from '@kadira/storybook';
 
 import AreaSeries from '../src/series/AreaSeries';
 import Axis from '../src/axis/Axis';
@@ -31,7 +31,7 @@ class StateOscilator extends Component {
                 data04: this.state.data04
                     .map(d => ({...d, y: rand(20, 120)}))
             });
-        }, 1500);
+        }, 3000);
     }
     componentWillUnmount() {
         clearInterval(this.interval);
@@ -51,6 +51,7 @@ class StateOscilator extends Component {
                     stroke: '#895D94',
                     fill: '#D9BAE1'
                 }}
+                onClick={action('area clicked!')}
                 yAxisId='wide'
                 data={this.state.data01} />
             <LineSeries
@@ -62,12 +63,14 @@ class StateOscilator extends Component {
                 curveProps={{
                     stroke: '#85946C'
                 }}
+                onClick={action('line clicked!')}
                 yAxisId='wide'
                 data={this.state.data02} />
             <BarSeries
                 pointProps={{
                     fill: '#63666B'
                 }}
+                onClick={action('bar clicked!')}
                 yAxisId='auto'
                 data={this.state.data03} />
             <ScatterSeries
@@ -77,6 +80,7 @@ class StateOscilator extends Component {
                     stroke: '#85946C',
                     fill: '#D2E1BA'
                 }}
+                onClick={action('scatter clicked!')}
                 yAxisId='auto'
                 data={this.state.data04} />
         </Chart>;

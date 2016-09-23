@@ -1,12 +1,14 @@
 import React, {PropTypes, PureComponent} from 'react';
-import {addIndex, map} from 'ramda';
+import {addIndex, keys, map, pick} from 'ramda';
 
+import {EVENT_ATTRIBUTES} from '../utils/react';
 //    mapIndexed :: (a -> Number -> b) -> [a] -> [b]
 const mapIndexed = addIndex(map);
 
 const defineSeries = (name, curveElement, pointElement, toPoint) => class extends PureComponent {
     static displayName = name
     static propTypes = {
+        ...EVENT_ATTRIBUTES,
         xAxisId: PropTypes.string,
         yAxisId: PropTypes.string,
         data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -37,7 +39,13 @@ const defineSeries = (name, curveElement, pointElement, toPoint) => class extend
     renderPointItem = ({x, y, ...point}) => {
         const {pointElement, pointProps} = this.props;
 
-        return React.cloneElement(pointElement, {...point, ...pointProps, x, y});
+        return React.cloneElement(pointElement, {
+            ...point,
+            ...pointProps,
+            x,
+            y,
+            ...pick(keys(EVENT_ATTRIBUTES), this.props)
+        });
     }
     renderPoints(points) {
         return map(this.renderPointItem, points);
