@@ -32,8 +32,9 @@ class StateOscilator extends Component {
     }
     render() {
         return <Chart width={400} height={400}>
-            <Axis orientation='x' domain={[-100, 200]} />
-            <Axis orientation='y' domain={[-200, 200]} />
+            <Axis orientation='x' domain={[-100, 200]} positionReferenceId='wide' />
+            <Axis orientation='y' domain={[-200, 200]} axisId='wide' position={-50} />
+            <Axis orientation='y' domain={[-150, 150]} axisId='narrow' />
             <AreaSeries
                 pointProps={{
                     size: 50,
@@ -44,6 +45,7 @@ class StateOscilator extends Component {
                     stroke: '#895D94',
                     fill: '#D9BAE1'
                 }}
+                yAxisId='wide'
                 data={this.state.data01}
                  />
             <LineSeries
@@ -55,11 +57,13 @@ class StateOscilator extends Component {
                 curveProps={{
                     stroke: '#85946C'
                 }}
+                yAxisId='wide'
                 data={this.state.data} />
             <BarSeries
                 pointProps={{
                     fill: '#63666B'
                 }}
+                yAxisId='narrow'
                 data={this.state.data01} />
         </Chart>;
     }
@@ -97,4 +101,4 @@ storiesOf('Chart', module)
                 data={data01} />
         </Chart>
     )
-    .add('Animated', () => <StateOscilator />);
+    .add('All the goodness', () => <StateOscilator />);
