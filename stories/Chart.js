@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {storiesOf} from '@kadira/storybook';
 
 import AreaSeries from '../src/series/AreaSeries';
+import Axis from '../src/axis/Axis';
 import BarSeries from '../src/series/BarSeries';
 import Chart from '../src/Chart';
 import LineSeries from '../src/series/LineSeries';
@@ -31,6 +32,7 @@ class StateOscilator extends Component {
     }
     render() {
         return <Chart width={400} height={400}>
+            <Axis orientation='x' />
             <AreaSeries
                 pointProps={{
                     size: 50,
