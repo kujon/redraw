@@ -46,8 +46,7 @@ class StateOscilator extends Component {
                     fill: '#D9BAE1'
                 }}
                 yAxisId='wide'
-                data={this.state.data01}
-                 />
+                data={this.state.data01} />
             <LineSeries
                 pointProps={{
                     size: 50,

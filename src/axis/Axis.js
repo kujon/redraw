@@ -18,7 +18,11 @@ class Axis extends PureComponent {
         scale: PropTypes.func,
         thickness: PropTypes.number,
         tickCount: PropTypes.number,
-        tickElement: PropTypes.element
+        tickElement: PropTypes.element,
+        tickProps: PropTypes.shape({
+            length: PropTypes.number,
+            thickness: PropTypes.number
+        })
     }
     static defaultProps = {
         axisId: '',
@@ -31,15 +35,21 @@ class Axis extends PureComponent {
         scale: identity,
         thickness: 1,
         tickCount: 5,
-        tickElement: <Rectangle width={4} height={4} />
+        tickElement: <Rectangle />,
+        tickProps: {
+            length: 5,
+            thickness: 1
+        }
     }
     renderTicks() {
-        const {orientation, scale, tickCount, tickElement} = this.props;
+        const {orientation, scale, tickCount, tickElement, tickProps: {length, thickness}} = this.props;
 
         return map(t =>
             React.cloneElement(tickElement, {
-                x: orientation === 'x' ? scale(t) : 0,
-                y: orientation === 'y' ? scale(t) : 0
+                x: orientation === 'x' ? scale(t) - thickness / 2 : -length / 2,
+                y: orientation === 'y' ? scale(t) - thickness / 2 : -length / 2,
+                width: orientation === 'x' ? thickness : length,
+                height: orientation === 'y' ? thickness : length
             }),
         scale.ticks(tickCount));
     }
