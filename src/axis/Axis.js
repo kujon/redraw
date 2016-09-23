@@ -29,7 +29,7 @@ class Axis extends PureComponent {
     }
     static defaultProps = {
         axisId: '',
-        domain: [null, null],
+        domain: [0, null],
         fill: 'black',
         length: 0,
         position: 0,
