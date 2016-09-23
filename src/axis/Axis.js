@@ -7,30 +7,28 @@ class Axis extends PureComponent {
         ...PRESENTATIONAL_ATTRIBUTES,
         orientation: PropTypes.oneOf(['x', 'y']).isRequired,
         axisId: PropTypes.string,
-        data: PropTypes.array,
         domain: PropTypes.array,
         length: PropTypes.number,
-        thickness: PropTypes.number,
-        x: PropTypes.number,
-        y: PropTypes.number
+        position: PropTypes.number,
+        scale: PropTypes.func,
+        thickness: PropTypes.number
     }
     static defaultProps = {
         axisId: '',
-        data: [],
         domain: [null, null],
         length: 0,
+        position: 0,
+        scale: a => a,
         thickness: 1,
-        fill: 'black',
-        x: 0,
-        y: 0
+        fill: 'black'
     }
     render() {
-        const {orientation, length, thickness, x, y} = this.props;
+        const {orientation, length, position, scale, thickness} = this.props;
 
         return <rect
             width={orientation === 'x' ? length : thickness}
             height={orientation === 'x' ? thickness : length}
-            transform={`translate(${x}, ${y})`}
+            transform={orientation === 'x' ? `translate(0, ${scale(position)})` : `translate(${scale(position)}, 0)`}
             {...presentationalAttributes(this.props)} />;
     }
 }

@@ -25,14 +25,9 @@ const scales = (type, length, inverted, axes, groupedSeries) => fromPairs(map(([
     const dataDomains = map(s => domain(s.props[type], s.props.data), series);
     const [dataDomainMin, dataDomainMax] = combineDomains(dataDomains);
     const calculatedDomain = [defaultTo(dataDomainMin, domainMin), defaultTo(dataDomainMax, domainMax)];
+    const scale = scaleLinear().domain(calculatedDomain).range(inverted ? [length, 0] : [0, length]);
 
-    return [
-        id,
-        {
-            axis,
-            scale: scaleLinear().domain(calculatedDomain).range(inverted ? [length, 0] : [0, length])
-        }
-    ];
+    return [id, {axis, scale}];
 }, groupedSeries));
 
 //    groupSeries :: String -> [ReactElement] -> {String :: [ReactElement]}
@@ -72,9 +67,14 @@ class Chart extends PureComponent {
     renderAxes() {
         const {children, height, width} = this.props;
         const axes = findAxisChildren(children);
+        const {xScales, yScales} = this.getScales();
 
         return mapIndexed((a, key) =>
-            React.cloneElement(a, {length: a.props.orientation === 'x' ? width : height, key}),
+            React.cloneElement(a, {
+                length: a.props.orientation === 'x' ? width : height,
+                scale: a.props.orientation === 'x' ? yScales[a.props.axisId].scale : xScales[a.props.axisId].scale,
+                key
+            }),
         axes);
     }
     render() {

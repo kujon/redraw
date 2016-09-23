@@ -32,7 +32,7 @@ class StateOscilator extends Component {
     }
     render() {
         return <Chart width={400} height={400}>
-            <Axis orientation='x' />
+            <Axis orientation='x' domain={[-100, 200]} />
             <Axis orientation='y' domain={[-200, 200]} />
             <AreaSeries
                 pointProps={{
