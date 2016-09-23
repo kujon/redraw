@@ -34,7 +34,7 @@ class StateOscilator extends Component {
         return <Chart width={400} height={400}>
             <Axis orientation='x' domain={[-100, 200]} positionReferenceId='wide' />
             <Axis orientation='y' domain={[-200, 200]} axisId='wide' position={-50} />
-            <Axis orientation='y' domain={[-150, 150]} axisId='narrow' />
+            <Axis orientation='y' axisId='auto' />
             <AreaSeries
                 pointProps={{
                     size: 50,
@@ -63,7 +63,7 @@ class StateOscilator extends Component {
                 pointProps={{
                     fill: '#63666B'
                 }}
-                yAxisId='narrow'
+                yAxisId='auto'
                 data={this.state.data01} />
         </Chart>;
     }

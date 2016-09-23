@@ -1,6 +1,7 @@
 import React, {PropTypes, PureComponent} from 'react';
 import {identity, map} from 'ramda';
 
+import Rectangle from '../shapes/Rectangle';
 import {PRESENTATIONAL_ATTRIBUTES, presentationalAttributes} from '../utils/svg';
 
 class Axis extends PureComponent {
@@ -16,7 +17,8 @@ class Axis extends PureComponent {
         referenceScale: PropTypes.func,
         scale: PropTypes.func,
         thickness: PropTypes.number,
-        tickCount: PropTypes.number
+        tickCount: PropTypes.number,
+        tickElement: PropTypes.element
     }
     static defaultProps = {
         axisId: '',
@@ -28,18 +30,17 @@ class Axis extends PureComponent {
         referenceScale: identity,
         scale: identity,
         thickness: 1,
-        tickCount: 5
+        tickCount: 5,
+        tickElement: <Rectangle width={4} height={4} />
     }
     renderTicks() {
-        const {orientation, scale, tickCount} = this.props;
+        const {orientation, scale, tickCount, tickElement} = this.props;
 
         return map(t =>
-            <rect
-                width={4}
-                height={4}
-                transform={orientation === 'x' ?
-                    `translate(${scale(t)}, 0)` :
-                    `translate(0, ${scale(t)})`} />,
+            React.cloneElement(tickElement, {
+                x: orientation === 'x' ? scale(t) : 0,
+                y: orientation === 'y' ? scale(t) : 0
+            }),
         scale.ticks(tickCount));
     }
     render() {
