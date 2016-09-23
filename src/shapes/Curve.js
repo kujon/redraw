@@ -1,9 +1,9 @@
 import React, {PropTypes, PureComponent} from 'react';
 import {line, curveLinear} from 'd3-shape';
-// import {Motion, spring} from 'react-motion';
 
 import {EVENT_ATTRIBUTES, eventAttributes} from '../utils/react';
 import {PRESENTATIONAL_ATTRIBUTES, presentationalAttributes} from '../utils/svg';
+// import {Motion, spring} from 'react-motion';
 
 const CURVE_TYPE_MAP = {
     linear: curveLinear

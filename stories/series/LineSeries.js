@@ -21,7 +21,6 @@ class StateOscilator extends Component {
             this.setState({
                 data: this.state.data
                     .map(d => ({...d, y: rand(20, 120)}))
-                    // .slice(0, Math.ceil(rand(this.state.data.length - 2, this.state.data.length)))
             });
         }, 1500);
     }
