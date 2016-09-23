@@ -1,8 +1,11 @@
 import React, {PropTypes, PureComponent} from 'react';
-import {identity, map} from 'ramda';
+import {addIndex, identity, map} from 'ramda';
 
 import Rectangle from '../shapes/Rectangle';
 import {PRESENTATIONAL_ATTRIBUTES, presentationalAttributes} from '../utils/svg';
+
+//    mapIndexed :: (a -> Number -> b) -> [a] -> [b]
+const mapIndexed = addIndex(map);
 
 class Axis extends PureComponent {
     static displayName = 'Axis'
@@ -44,12 +47,13 @@ class Axis extends PureComponent {
     renderTicks() {
         const {orientation, scale, tickCount, tickElement, tickProps: {length, thickness}} = this.props;
 
-        return map(t =>
+        return mapIndexed((t, key) =>
             React.cloneElement(tickElement, {
                 x: orientation === 'x' ? scale(t) - thickness / 2 : -length / 2,
                 y: orientation === 'y' ? scale(t) - thickness / 2 : -length / 2,
                 width: orientation === 'x' ? thickness : length,
-                height: orientation === 'y' ? thickness : length
+                height: orientation === 'y' ? thickness : length,
+                key
             }),
         scale.ticks(tickCount));
     }

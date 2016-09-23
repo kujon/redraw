@@ -36,11 +36,31 @@ const groupSeries = compose(toPairs, groupByProp);
 class Chart extends PureComponent {
     static propTypes = {
         ...EVENT_ATTRIBUTES,
-        width: PropTypes.number,
-        height: PropTypes.number
+        height: PropTypes.number.isRequired,
+        width: PropTypes.number.isRequired,
+        padding: PropTypes.shape({
+            top: PropTypes.number,
+            right: PropTypes.number,
+            bottom: PropTypes.number,
+            left: PropTypes.number
+        })
+    }
+    static defaultProps = {
+        padding: {
+            top: 10,
+            right: 10,
+            bottom: 10,
+            left: 10
+        }
+    }
+    getCanvasDimensions() {
+        const {height, padding: {top, right, bottom, left}, width} = this.props;
+
+        return {width: width - left - right, height: height - top - bottom};
     }
     getScales() {
-        const {children, height, width} = this.props;
+        const {children} = this.props;
+        const {height, width} = this.getCanvasDimensions();
         const series = findSeriesChildren(children);
         const axes = findAxisChildren(children);
         const groupedSeriesX = groupSeries('xAxisId', series);
@@ -65,7 +85,8 @@ class Chart extends PureComponent {
         }, series);
     }
     renderAxes() {
-        const {children, height, width} = this.props;
+        const {children} = this.props;
+        const {height, width} = this.getCanvasDimensions();
         const axes = findAxisChildren(children);
         const {xScales, yScales} = this.getScales();
 
@@ -83,14 +104,16 @@ class Chart extends PureComponent {
         axes);
     }
     render() {
-        const {height, width} = this.props;
+        const {height, padding: {top, left}, width} = this.props;
 
         return <svg
             {...eventAttributes(this.props)}
             width={width}
             height={height}>
-            <g>{this.renderSeries()}</g>
-            <g>{this.renderAxes()}</g>
+            <g transform={`translate(${left},${top})`}>
+                <g>{this.renderSeries()}</g>
+                <g>{this.renderAxes()}</g>
+            </g>
         </svg>;
     }
 }
