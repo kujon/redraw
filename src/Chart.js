@@ -72,7 +72,9 @@ class Chart extends PureComponent {
         return mapIndexed((a, key) =>
             React.cloneElement(a, {
                 length: a.props.orientation === 'x' ? width : height,
-                scale: a.props.orientation === 'x' ? yScales[a.props.axisId].scale : xScales[a.props.axisId].scale,
+                scale: a.props.orientation === 'x' ?
+                    yScales[a.props.positionReferenceId].scale :
+                    xScales[a.props.positionReferenceId].scale,
                 key
             }),
         axes);

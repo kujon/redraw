@@ -10,6 +10,7 @@ class Axis extends PureComponent {
         domain: PropTypes.array,
         length: PropTypes.number,
         position: PropTypes.number,
+        positionReferenceId: PropTypes.string,
         scale: PropTypes.func,
         thickness: PropTypes.number
     }
@@ -18,6 +19,7 @@ class Axis extends PureComponent {
         domain: [null, null],
         length: 0,
         position: 0,
+        positionReferenceId: '',
         scale: a => a,
         thickness: 1,
         fill: 'black'
