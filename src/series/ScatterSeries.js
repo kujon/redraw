@@ -1,12 +1,12 @@
 import React from 'react';
 
 import defineSeries from './defineSeries';
-import Curve from '../shapes/Curve';
+import Noop from '../Noop';
 import Symbols from '../shapes/Symbols';
 
-const LineSeries = defineSeries(
-    'LineSeries',
-    <Curve />,
+const ScatterSeries = defineSeries(
+    'ScatterSeries',
+    <Noop />,
     <Symbols />,
     (x, y, xScale, yScale) => (datum, key) => ({
         ...datum,
@@ -16,4 +16,4 @@ const LineSeries = defineSeries(
     })
 );
 
-export default LineSeries;
+export default ScatterSeries;

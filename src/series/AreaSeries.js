@@ -6,7 +6,7 @@ import Symbols from '../shapes/Symbols';
 
 const AreaSeries = defineSeries(
     'AreaSeries',
-    Area,
+    <Area />,
     <Symbols />,
     (x, y, xScale, yScale) => (datum, key) => ({
         ...datum,

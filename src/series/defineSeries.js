@@ -4,7 +4,7 @@ import {addIndex, map} from 'ramda';
 //    mapIndexed :: (a -> Number -> b) -> [a] -> [b]
 const mapIndexed = addIndex(map);
 
-const defineSeries = (name, CurveShape, pointElement, toPoint) => class extends PureComponent {
+const defineSeries = (name, curveElement, pointElement, toPoint) => class extends PureComponent {
     static displayName = name
     static propTypes = {
         xAxisId: PropTypes.string,
@@ -45,9 +45,7 @@ const defineSeries = (name, CurveShape, pointElement, toPoint) => class extends 
     renderCurve(points) {
         const {curveProps} = this.props;
 
-        return <CurveShape
-            {...curveProps}
-            points={points} />;
+        return React.cloneElement(curveElement, {...curveProps, points});
     }
     render() {
         return <g>

@@ -6,23 +6,29 @@ import Axis from '../src/axis/Axis';
 import BarSeries from '../src/series/BarSeries';
 import Chart from '../src/Chart';
 import LineSeries from '../src/series/LineSeries';
+import ScatterSeries from '../src/series/ScatterSeries';
 
 const data = [{x: 20, y: 30}, {x: 45, y: 110}, {x: 70, y: 90}, {x: 95, y: 50}, {x: 120, y: 30}];
-const data01 = [{x: 20, y: 30}, {x: 45, y: 40}, {x: 70, y: 50}, {x: 95, y: 45}, {x: 120, y: 50}];
 
 const rand = (min, max) => Math.random() * (max - min) + min;
 
 class StateOscilator extends Component {
     state = {
-        data,
-        data01
+        data01: data,
+        data02: data,
+        data03: data,
+        data04: data
     }
     componentWillMount() {
         this.interval = setInterval(() => {
             this.setState({
-                data: this.state.data
-                    .map(d => ({...d, y: rand(20, 120)})),
                 data01: this.state.data01
+                    .map(d => ({...d, y: rand(20, 120)})),
+                data02: this.state.data02
+                    .map(d => ({...d, y: rand(20, 120)})),
+                data03: this.state.data03
+                    .map(d => ({...d, y: rand(20, 120)})),
+                data04: this.state.data04
                     .map(d => ({...d, y: rand(20, 120)}))
             });
         }, 1500);
@@ -57,13 +63,22 @@ class StateOscilator extends Component {
                     stroke: '#85946C'
                 }}
                 yAxisId='wide'
-                data={this.state.data} />
+                data={this.state.data02} />
             <BarSeries
                 pointProps={{
                     fill: '#63666B'
                 }}
                 yAxisId='auto'
-                data={this.state.data01} />
+                data={this.state.data03} />
+            <ScatterSeries
+                pointProps={{
+                    size: 90,
+                    type: 'triangle',
+                    stroke: '#85946C',
+                    fill: '#D2E1BA'
+                }}
+                yAxisId='auto'
+                data={this.state.data04} />
         </Chart>;
     }
 }
@@ -81,7 +96,7 @@ storiesOf('Chart', module)
                     stroke: '#895D94',
                     fill: '#D9BAE1'
                 }}
-                data={data01}
+                data={data}
                  />
             <LineSeries
                 pointProps={{
@@ -97,7 +112,7 @@ storiesOf('Chart', module)
                 pointProps={{
                     fill: '#63666B'
                 }}
-                data={data01} />
+                data={data} />
         </Chart>
     )
     .add('All the goodness', () => <StateOscilator />);
