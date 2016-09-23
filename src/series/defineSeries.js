@@ -1,12 +1,14 @@
 import React, {PropTypes, PureComponent} from 'react';
 import {addIndex, map} from 'ramda';
 
-//    mapIndexed :: Functor f => (a -> Number -> b) -> f a -> f b
+//    mapIndexed :: (a -> Number -> b) -> [a] -> [b]
 const mapIndexed = addIndex(map);
 
 const defineSeries = (name, CurveShape, pointElement, toPoint) => class extends PureComponent {
     static displayName = name
     static propTypes = {
+        xAxisId: PropTypes.string,
+        yAxisId: PropTypes.string,
         data: PropTypes.arrayOf(PropTypes.object).isRequired,
         curveProps: PropTypes.object,
         pointElement: PropTypes.element,
@@ -17,6 +19,8 @@ const defineSeries = (name, CurveShape, pointElement, toPoint) => class extends 
         yScale: PropTypes.func
     }
     static defaultProps = {
+        xAxisId: '',
+        yAxisId: '',
         curveProps: {},
         pointElement,
         pointProps: {},

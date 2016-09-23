@@ -1,4 +1,4 @@
-import {curry, keys, map, pick, test} from 'ramda';
+import {curry, find, keys, map, pick, test} from 'ramda';
 import {Children, PropTypes} from 'react';
 
 const EVENT_ATTRIBUTES = {
@@ -42,3 +42,6 @@ export const findSeriesChildren = findChildren(isSeriesChild);
 
 //           findAxisChildren :: Children -> Children
 export const findAxisChildren = findChildren(isAxisChild);
+
+//           findAxisById :: String -> [ReactElement] -> ReactElement|undefined
+export const findAxisById = curry((id, axes) => find(a => a.props.axisId === id, axes));

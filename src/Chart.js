@@ -1,15 +1,26 @@
 import React, {PropTypes, PureComponent} from 'react';
 import {scaleLinear} from 'd3-scale';
-import {addIndex, map, reduce} from 'ramda';
+import {addIndex, defaultTo, map, reduce} from 'ramda';
 
-import {EVENT_ATTRIBUTES, eventAttributes, findSeriesChildren} from './utils/react';
+import Axis from './axis/Axis';
+import {EVENT_ATTRIBUTES, eventAttributes, findAxisById, findAxisChildren, findSeriesChildren} from './utils/react';
 
-//    mapIndexed :: Functor f => (a -> Number -> b) -> f a -> f b
+//    mapIndexed :: (a -> Number -> b) -> [a] -> [b]
 const mapIndexed = addIndex(map);
 
 //    domain :: (a -> Number) -> [a] -> Number
 const domain = (accessor, data) =>
     reduce(([min, max], d) => [Math.min(accessor(d), min), Math.max(accessor(d), max)], [Infinity, -Infinity], data);
+
+//    scale :: String -> (Datum -> Number) -> Number -> Boolean -> [ReactElement] -> [Datum] -> (Number -> Number)
+const scale = (axisId, value, length, inverted, axes, data) => {
+    const axis = findAxisById(axisId, axes);
+    const {props: {domain: [domainMin, domainMax]}} = axis ? axis : {props: Axis.defaultProps};
+    const [dataDomainMin, dataDomainMax] = domain(value, data);
+    const calculatedDomain = [defaultTo(dataDomainMin, domainMin), defaultTo(dataDomainMax, domainMax)];
+
+    return scaleLinear().domain(calculatedDomain).range(inverted ? [length, 0] : [0, length]);
+};
 
 class Chart extends PureComponent {
     static propTypes = {
@@ -20,13 +31,12 @@ class Chart extends PureComponent {
     getScales() {
         const {children, height, width} = this.props;
         const series = findSeriesChildren(children);
+        const axes = findAxisChildren(children);
 
         return map(s => {
-            const {data, x, y} = s.props;
-            const xDomain = domain(x, data);
-            const yDomain = domain(y, data);
-            const xScale = scaleLinear().domain(xDomain).range([0, width]);
-            const yScale = scaleLinear().domain(yDomain).range([height, 0]);
+            const {xAxisId, yAxisId, data, x, y} = s.props;
+            const xScale = scale(xAxisId, x, width, false, axes, data);
+            const yScale = scale(yAxisId, y, height, true, axes, data);
 
             return [xScale, yScale];
         }, series);

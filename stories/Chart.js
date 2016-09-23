@@ -55,7 +55,7 @@ class StateOscilator extends Component {
                 data={this.state.data} />
             <BarSeries
                 pointProps={{
-                    fill: '#AFE154'
+                    fill: '#63666B'
                 }}
                 data={this.state.data01} />
         </Chart>;
@@ -89,7 +89,7 @@ storiesOf('Chart', module)
                 data={data} />
             <BarSeries
                 pointProps={{
-                    fill: '#AFE154'
+                    fill: '#63666B'
                 }}
                 data={data01} />
         </Chart>
