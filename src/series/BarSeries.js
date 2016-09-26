@@ -15,7 +15,7 @@ const BarSeries = defineSeries(
         const height = Math.abs(yScale(0) - yValue);
 
         return {
-            ...datum,
+            datum,
             x: xScale(x(datum)) - 5,
             y: yValue,
             height,

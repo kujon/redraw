@@ -56,9 +56,11 @@ const defineSeries = (name, curveElement, pointElement, toPoint) => class extend
         return React.cloneElement(curveElement, {...curveProps, points});
     }
     render() {
+        const {points} = this;
+
         return <g>
-            {this.renderCurve(this.points)}
-            {this.renderPoints(this.points)}
+            {this.renderCurve(points)}
+            {this.renderPoints(points)}
         </g>;
     }
 };

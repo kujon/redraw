@@ -9,7 +9,7 @@ const LineSeries = defineSeries(
     <Curve />,
     <Symbols />,
     (x, y, xScale, yScale) => (datum, key) => ({
-        ...datum,
+        datum,
         x: xScale(x(datum)),
         y: yScale(y(datum)),
         key

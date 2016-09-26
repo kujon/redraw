@@ -9,7 +9,7 @@ const AreaSeries = defineSeries(
     <Area />,
     <Symbols />,
     (x, y, xScale, yScale) => (datum, key) => ({
-        ...datum,
+        datum,
         x: xScale(x(datum)),
         x0: xScale(x(datum)),
         x1: xScale(x(datum)),
